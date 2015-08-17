@@ -12,7 +12,7 @@ import (
 	"strings"
 	"sync"
 	"time"
-
+	"errors"
 	"github.com/coreos/go-etcd/etcd"
 	"github.com/coreos/go-systemd/activation"
 	"github.com/miekg/dns"
@@ -510,8 +510,20 @@ func (s *server) ServeDNS(w dns.ResponseWriter, req *dns.Msg) {
 }
 
 func (s *server) AddressRecords(q dns.Question, name string, previousRecords []dns.RR, bufsize uint16, dnssec, both bool) (records []dns.RR, err error) {
+
+	defaultName := "1." + s.config.Domain
+
+	if name == s.config.Domain {
+		name = defaultName
+	}
+
 	services, err := s.backend.Records(name, false)
 	if err != nil {
+		
+		if name != defaultName {
+			return AddressRecords(q, defaultName, previousRecords, bufsize, dnssec, both)
+		}
+		
 		return nil, err
 	}
 
@@ -580,6 +592,9 @@ func (s *server) AddressRecords(q dns.Question, name string, previousRecords []d
 
 // NSRecords returns NS records from etcd.
 func (s *server) NSRecords(q dns.Question, name string) (records []dns.RR, extra []dns.RR, err error) {
+
+	return nil, nil, errors.New("Not Implement !")
+
 	services, err := s.backend.Records(name, false)
 	if err != nil {
 		return nil, nil, err
@@ -608,6 +623,9 @@ func (s *server) NSRecords(q dns.Question, name string) (records []dns.RR, extra
 // SRVRecords returns SRV records from etcd.
 // If the Target is not a name but an IP address, a name is created.
 func (s *server) SRVRecords(q dns.Question, name string, bufsize uint16, dnssec bool) (records []dns.RR, extra []dns.RR, err error) {
+
+	return nil, nil, errors.New("Not Implement !")
+
 	services, err := s.backend.Records(name, false)
 	if err != nil {
 		return nil, nil, err
@@ -693,6 +711,9 @@ func (s *server) SRVRecords(q dns.Question, name string, bufsize uint16, dnssec 
 // MXRecords returns MX records from etcd.
 // If the Target is not a name but an IP address, a name is created.
 func (s *server) MXRecords(q dns.Question, name string, bufsize uint16, dnssec bool) (records []dns.RR, extra []dns.RR, err error) {
+
+	return nil, nil, errors.New("Not Implement !")
+
 	services, err := s.backend.Records(name, false)
 	if err != nil {
 		return nil, nil, err
@@ -750,6 +771,9 @@ func (s *server) MXRecords(q dns.Question, name string, bufsize uint16, dnssec b
 }
 
 func (s *server) CNAMERecords(q dns.Question, name string) (records []dns.RR, err error) {
+
+	return nil, errors.New("Not Implement !")
+
 	services, err := s.backend.Records(name, true)
 	if err != nil {
 		return nil, err
@@ -767,6 +791,9 @@ func (s *server) CNAMERecords(q dns.Question, name string) (records []dns.RR, er
 }
 
 func (s *server) TXTRecords(q dns.Question, name string) (records []dns.RR, err error) {
+
+	return nil, errors.New("Not Implement !")
+
 	services, err := s.backend.Records(name, false)
 	if err != nil {
 		return nil, err
@@ -784,6 +811,9 @@ func (s *server) TXTRecords(q dns.Question, name string) (records []dns.RR, err 
 }
 
 func (s *server) PTRRecords(q dns.Question) (records []dns.RR, err error) {
+
+	return nil, errors.New("Not Implement !")
+
 	name := strings.ToLower(q.Name)
 	serv, err := s.backend.ReverseRecord(name)
 	if err != nil {
