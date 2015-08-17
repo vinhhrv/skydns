@@ -20,9 +20,9 @@ import (
 	"github.com/coreos/go-etcd/etcd"
 	"github.com/miekg/dns"
 
-	backendetcd "github.com/skynetservices/skydns/backends/etcd"
+	backendetcd "github.com/vinhhrv/skydns/backends/etcd"
 	"github.com/skynetservices/skydns/msg"
-	"github.com/skynetservices/skydns/server"
+	"github.com/vinhhrv/skydns/server"
 	"github.com/skynetservices/skydns/stats"
 )
 
