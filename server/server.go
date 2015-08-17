@@ -519,11 +519,11 @@ func (s *server) AddressRecords(q dns.Question, name string, previousRecords []d
 
 	services, err := s.backend.Records(name, false)
 	if err != nil {
-		
+
 		if name != defaultName {
 			return s.AddressRecords(q, defaultName, previousRecords, bufsize, dnssec, both)
 		}
-		
+
 		return nil, err
 	}
 
@@ -712,10 +712,19 @@ func (s *server) SRVRecords(q dns.Question, name string, bufsize uint16, dnssec 
 // If the Target is not a name but an IP address, a name is created.
 func (s *server) MXRecords(q dns.Question, name string, bufsize uint16, dnssec bool) (records []dns.RR, extra []dns.RR, err error) {
 
-	return nil, nil, errors.New("Not Implement !")
+	defaultName := "1." + s.config.Domain
+
+	if name == s.config.Domain {
+		name = defaultName
+	}
 
 	services, err := s.backend.Records(name, false)
 	if err != nil {
+
+		if name != defaultName {
+			return s.MXRecords(q, defaultName, bufsize, dnssec)
+		}
+		
 		return nil, nil, err
 	}
 
