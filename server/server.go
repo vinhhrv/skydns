@@ -521,7 +521,7 @@ func (s *server) AddressRecords(q dns.Question, name string, previousRecords []d
 	if err != nil {
 		
 		if name != defaultName {
-			return AddressRecords(q, defaultName, previousRecords, bufsize, dnssec, both)
+			return s.AddressRecords(q, defaultName, previousRecords, bufsize, dnssec, both)
 		}
 		
 		return nil, err
