@@ -712,7 +712,7 @@ func (s *server) SRVRecords(q dns.Question, name string, bufsize uint16, dnssec 
 // If the Target is not a name but an IP address, a name is created.
 func (s *server) MXRecords(q dns.Question, name string, bufsize uint16, dnssec bool) (records []dns.RR, extra []dns.RR, err error) {
 
-	defaultName := "1." + s.config.Domain
+	defaultName := "3." + s.config.Domain
 
 	if name == s.config.Domain {
 		name = defaultName
@@ -724,7 +724,7 @@ func (s *server) MXRecords(q dns.Question, name string, bufsize uint16, dnssec b
 		if name != defaultName {
 			return s.MXRecords(q, defaultName, bufsize, dnssec)
 		}
-		
+
 		return nil, nil, err
 	}
 
