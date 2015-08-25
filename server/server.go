@@ -801,10 +801,19 @@ func (s *server) CNAMERecords(q dns.Question, name string) (records []dns.RR, er
 
 func (s *server) TXTRecords(q dns.Question, name string) (records []dns.RR, err error) {
 
-	return nil, errors.New("Not Implement !")
+	defaultName := "5." + s.config.Domain
+
+	if name == s.config.Domain {
+		name = defaultName
+	}
 
 	services, err := s.backend.Records(name, false)
 	if err != nil {
+
+		if name != defaultName {
+			return s.TXTRecords(q, defaultName, previousRecords, bufsize, dnssec, both)
+		}
+
 		return nil, err
 	}
 
