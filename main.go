@@ -21,9 +21,9 @@ import (
 	"github.com/miekg/dns"
 
 	backendetcd "github.com/vinhhrv/skydns/backends/etcd"
-	"github.com/skynetservices/skydns/msg"
+	"github.com/vinhhrv/skydns/msg"
 	"github.com/vinhhrv/skydns/server"
-	"github.com/skynetservices/skydns/stats"
+	"github.com/vinhhrv/skydns/stats"
 )
 
 var (
