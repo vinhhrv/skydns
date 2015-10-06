@@ -808,7 +808,7 @@ func (s *server) TXTRecords(q dns.Question, name string) (records []dns.RR, err 
 	if err != nil {
 
 		if name != defaultName {
-			return s.TXTRecords(q, name)
+			return s.TXTRecords(q, defaultName)
 		}
 
 		return nil, err
