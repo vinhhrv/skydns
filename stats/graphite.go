@@ -14,7 +14,7 @@ import (
 	"github.com/rcrowley/go-metrics"
 	"github.com/rcrowley/go-metrics/stathat"
 
-	"github.com/skynetservices/skydns/server"
+	"github.com/vinhhrv/skydns/server"
 )
 
 var (
