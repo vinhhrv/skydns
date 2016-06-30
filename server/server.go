@@ -778,7 +778,7 @@ func (s *server) MXRecords(q dns.Question, name string, bufsize uint16, dnssec b
 
 func (s *server) CNAMERecords(q dns.Question, name string) (records []dns.RR, err error) {
 
-	return nil, errors.New("Not Implement !")
+	//return nil, errors.New("Not Implement !")
 
 	services, err := s.backend.Records(name, true)
 	if err != nil {
